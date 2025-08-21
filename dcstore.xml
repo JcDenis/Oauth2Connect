@@ -2,11 +2,11 @@
 <modules xmlns:da="http://dotaddict.org/da/">
   <module id="Oauth2Connect">
     <name>Oauth2 Connect</name>
-    <version>0.1</version>
-    <date>2025-08-13T22:56:08+00:00</date>
+    <version>0.1.1</version>
+    <date>2025-08-21T13:19:18+00:00</date>
     <author>Jean-Christian Paul Denis and contributors</author>
     <desc>Allow third party connection on frontend.</desc>
-    <file>https://github.com/JcDenis/Oauth2Connect/releases/download/v0.1/plugin-Oauth2Connect.zip</file>
+    <file>https://github.com/JcDenis/Oauth2Connect/releases/download/v0.1.1/plugin-Oauth2Connect.zip</file>
     <da:dcmin>2.36</da:dcmin>
     <da:details>https://github.com/JcDenis/Oauth2Connect/src/branch/master/README.md</da:details>
     <da:support>https://github.com/JcDenis/Oauth2Connect/issues</da:support>
