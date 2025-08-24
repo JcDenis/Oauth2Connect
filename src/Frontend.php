@@ -7,7 +7,8 @@ namespace Dotclear\Plugin\Oauth2Connect;
 use ArrayObject, Throwable;
 use Dotclear\App;
 use Dotclear\Core\Process;
-use Dotclear\Helper\Html\Form\{ Div, Li, Para };
+use Dotclear\Helper\Html\Form\{ Li, Para, Ul };
+use Dotclear\Helper\L10n;
 use Dotclear\Helper\Network\Http;
 use Dotclear\Helper\OAuth2\Client\Exception\InvalidUser;
 use Dotclear\Plugin\FrontendSession\FrontendSessionProfil;
@@ -57,6 +58,8 @@ class Frontend extends Process
             return false;
         }
 
+        L10n::set(implode(DIRECTORY_SEPARATOR, [dirname(__DIR__), 'locales', App::lang()->getLang(), 'public']));
+
         App::behavior()->addBehaviors([
             /**
              * Do oauth flow actions.
@@ -83,17 +86,14 @@ class Frontend extends Process
                         }
                         $link = self::oauth2()->getActionButton((string) App::auth()->userID(), $oauth2_service::getId(), Http::getSelfURI(), true);
                         if ($link !== null) {
-                            $oauth2_items[] = (new Div())
-                                ->class(['three-boxes'])
-                                ->items([
-                                    (new Para())
-                                        ->items([$link]),
-                                ]);
+                            $oauth2_items[] = (new Li())->items([$link]);
                         }
                     }
                 }
 
-                $profil->addAction(My::id(), __('Third party connections'), $oauth2_items);
+                if ($oauth2_items !== []) {
+                    $profil->addAction(My::id(), __('Third party connections'), [(new Ul())->items($oauth2_items)]);
+                }
             },
 
             /**
