@@ -18,7 +18,7 @@ $this->registerModule(
     'Oauth2 Connect',
     'Allow third party connection on frontend.',
     'Jean-Christian Paul Denis and Contributors',
-    '0.1.1',
+    '0.2',
     [
         'requires'    => [
             ['core', '2.36'],
