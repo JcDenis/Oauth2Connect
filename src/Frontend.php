@@ -6,7 +6,7 @@ namespace Dotclear\Plugin\Oauth2Connect;
 
 use ArrayObject, Throwable;
 use Dotclear\App;
-use Dotclear\Core\Process;
+use Dotclear\Helper\Process\TraitProcess;
 use Dotclear\Helper\Html\Form\{ Li, Para, Ul };
 use Dotclear\Helper\L10n;
 use Dotclear\Helper\Network\Http;
@@ -20,8 +20,10 @@ use Dotclear\Plugin\FrontendSession\FrontendSessionProfil;
  * @author      Jean-Christian Paul Denis
  * @copyright   AGPL-3.0
  */
-class Frontend extends Process
+class Frontend
 {
+    use TraitProcess;
+
     /**
      * oauth2 client instance.
      *

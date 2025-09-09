@@ -7,7 +7,7 @@ namespace Dotclear\Plugin\Oauth2Connect;
 use Exception;
 use Dotclear\App;
 use Dotclear\Core\Backend\{ Notices, Page };
-use Dotclear\Core\Process;
+use Dotclear\Helper\Process\TraitProcess;
 use Dotclear\Helper\Html\Form\{ Div, Fieldset, Form, Input, Label, Legend, Li, Link, Note, Para, Submit, Text, Ul };
 
 /**
@@ -17,8 +17,10 @@ use Dotclear\Helper\Html\Form\{ Div, Fieldset, Form, Input, Label, Legend, Li, L
  * @author      Jean-Christian Paul Denis
  * @copyright   AGPL-3.0
  */
-class Manage extends Process
+class Manage
 {
+    use TraitProcess;
+
     /**
      * Oauth2 client instance.
      *

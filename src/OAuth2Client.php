@@ -35,7 +35,7 @@ class OAuth2Client extends Client
 
     protected function checkSession(): void
     {
-        App::frontend()->session()->start();
+        App::session()->start();
     }
 
     protected function requestActionError(Exception $e): bool
