@@ -4,14 +4,17 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\Oauth2Connect;
 
-use ArrayObject, Throwable;
+use ArrayObject;
 use Dotclear\App;
 use Dotclear\Helper\Process\TraitProcess;
-use Dotclear\Helper\Html\Form\{ Li, Para, Ul };
+use Dotclear\Helper\Html\Form\Li;
+use Dotclear\Helper\Html\Form\Para;
+use Dotclear\Helper\Html\Form\Ul;
 use Dotclear\Helper\L10n;
 use Dotclear\Helper\Network\Http;
 use Dotclear\Helper\OAuth2\Client\Exception\InvalidUser;
 use Dotclear\Plugin\FrontendSession\FrontendSessionProfil;
+use Throwable;
 
 /**
  * @brief       Oauth2Connect module frontend process.

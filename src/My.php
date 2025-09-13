@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dotclear\Plugin\Oauth2Connect;
 
-use Dotclear\App;
 use Dotclear\Module\MyPlugin;
 
 /**

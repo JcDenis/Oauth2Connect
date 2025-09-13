@@ -8,9 +8,14 @@ use Dotclear\App;
 use Dotclear\Core\Backend\Helper;
 use Dotclear\Helper\Html\Form\Img;
 use Dotclear\Helper\Network\Http;
-use Dotclear\Helper\OAuth2\Client\{ Client, Provider };
+use Dotclear\Helper\OAuth2\Client\Client;
+use Dotclear\Helper\OAuth2\Client\Provider;
 use Dotclear\Helper\OAuth2\Client\Exception\InvalidUser;
-use Dotclear\Schema\OAuth2\{ Auth0Connect, GithubConnect, GoogleConnect, Lwa, SlackConnect };
+use Dotclear\Schema\OAuth2\Auth0Connect;
+use Dotclear\Schema\OAuth2\GithubConnect;
+use Dotclear\Schema\OAuth2\GoogleConnect;
+use Dotclear\Schema\OAuth2\Lwa;
+use Dotclear\Schema\OAuth2\SlackConnect;
 use Exception;
 
 /**
@@ -57,7 +62,7 @@ class OAuth2Client extends Client
         if (App::auth()->checkUser($user_id, null, null, false) 
             && App::frontend()->context()->frontend_session?->check($user_id)
         ) {
-            App::blog()->triggerBLog();
+            App::blog()->triggerBlog();
 
             return true;
         }

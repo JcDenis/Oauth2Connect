@@ -6,9 +6,14 @@ namespace Dotclear\Plugin\Oauth2Connect;
 
 use ArrayObject;
 use Dotclear\App;
-use Dotclear\Database\Statement\{ DeleteStatement, SelectStatement };
-use Dotclear\Helper\Container\{ Factories, Factory };
-use Dotclear\Helper\OAuth2\Client\{ Consumer, Store, Token, User };
+use Dotclear\Database\Statement\DeleteStatement;
+use Dotclear\Database\Statement\SelectStatement;
+use Dotclear\Helper\Container\Factories;
+use Dotclear\Helper\Container\Factory;
+use Dotclear\Helper\OAuth2\Client\Consumer;
+use Dotclear\Helper\OAuth2\Client\Store;
+use Dotclear\Helper\OAuth2\Client\Token;
+use Dotclear\Helper\OAuth2\Client\User;
 
 /**
  * @brief       Oauth2Connect client store class.
