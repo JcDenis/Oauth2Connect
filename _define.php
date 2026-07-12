@@ -14,6 +14,8 @@
  */
 declare(strict_types=1);
 
+$id = 'Oauth2Connect';
+
 $this->registerModule(
     'Oauth2 Connect',
     'Allow third party connection on frontend.',
@@ -21,14 +23,14 @@ $this->registerModule(
     '0.3.1',
     [
         'requires'    => [
-            ['core', '2.36'],
+            ['core', '2.39'],
             ['FrontendSession', '0.34'],
         ],
         'permissions' => 'My',
         'type'        => 'plugin',
-        'support'     => 'https://github.com/JcDenis/' . $this->id . '/issues',
-        'details'     => 'https://github.com/JcDenis/' . $this->id . '/',
-        'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $this->id . '/master/dcstore.xml',
+        'support'     => 'https://github.com/JcDenis/' . $id . '/issues',
+        'details'     => 'https://github.com/JcDenis/' . $id . '/',
+        'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $id . '/master/dcstore.xml',
         'date'        => '2025-09-13T15:56:02+00:00',
     ]
 );
