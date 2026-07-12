@@ -63,7 +63,7 @@ class Manage
             $disabled = self::$oauth2->getDisabledProviders();
 
             foreach (self::$oauth2->services()->getProviders() as $id => $class) {
-                if (($_POST['provider'] ?? '') == $id) {
+                if (($_POST['provider'] ?? '') === $id) {
                     $key = array_search($id, $disabled);
                     if (!empty($_POST[$id . 'disable'])) {
                         if ($key === false) {
@@ -79,9 +79,9 @@ class Manage
                         // save provider
                         self::$oauth2->store()->setConsumer(
                             $id,
-                            $_POST[$id . 'key'] ?? '',
-                            $_POST[$id . 'secret'] ?? '',
-                            $_POST[$id . 'domain'] ?? ''
+                            is_string($_POST[$id . 'key']) ? $_POST[$id . 'key'] : '',
+                            is_string($_POST[$id . 'secret']) ? $_POST[$id . 'secret'] : '',
+                            is_string($_POST[$id . 'domain']) ? $_POST[$id . 'domain'] : ''
                         );
                     }
                 }
@@ -106,6 +106,9 @@ class Manage
         if (self::$oauth2 !== null) {
             $disabled = self::$oauth2->getDisabledProviders();
             foreach (self::$oauth2->services()->getProviders() as $id => $class) {
+                if (!is_a($class, '\Dotclear\Helper\OAuth2\Client\Provider', true)) {
+                    continue;
+                }
                 if (in_array($id, $disabled)) {
                     // disabled provider
                     $items[] = (new Fieldset())
@@ -138,7 +141,7 @@ class Manage
                     $provider = self::$oauth2->services()->getProvider($consumer);
 
                     $items[] = (new Fieldset())
-                        ->legend(new Legend(self::$oauth2->getProviderLogo($provider) . ' ' .$class::getName()))
+                        ->legend(new Legend(self::$oauth2->getProviderLogo($provider) . ' ' . $class::getName()))
                         ->items([
                             (new Form($id . '_config'))
                                 ->method('post')
@@ -158,7 +161,7 @@ class Manage
                                                 ->class('maximal')
                                                 ->size(65)
                                                 ->maxlength(255)
-                                                ->value($consumer->get('key'))
+                                                ->value(is_string($consumer->get('key')) ? $consumer->get('key') : '')
                                                 ->label(new Label(__('Application key:'), Label::OL_TF)),
                                         ]),
                                     (new Para())
@@ -167,7 +170,7 @@ class Manage
                                                 ->class('maximal')
                                                 ->size(65)
                                                 ->maxlength(255)
-                                                ->value($consumer->get('secret'))
+                                                ->value(is_string($consumer->get('secret')) ? $consumer->get('secret') : '')
                                                 ->label(new Label(__('Application secret:'), Label::OL_TF)),
                                         ]),
                                     (new Para())
@@ -176,7 +179,7 @@ class Manage
                                                 ->class('maximal')
                                                 ->size(65)
                                                 ->maxlength(255)
-                                                ->value($consumer->get('domain'))
+                                                ->value(is_string($consumer->get('domain')) ? $consumer->get('domain') : '')
                                                 ->label(new Label(__('Application domain:'), Label::OL_TF)),
                                         ]),
 

@@ -35,12 +35,19 @@ class OAuth2Store extends Store
     {
         if (!isset($this->consumers[$provider])) {
             // consumer stores in blog settings
-            $consumer = json_decode((string) My::settings()->get($provider . '_consumer'), true);
+            $consumer = My::settings()->get($provider . '_consumer');
+            $consumer = json_decode(is_string($consumer) ? $consumer : '', true);
             if (!is_array($consumer) || ($consumer['provider'] ?? '') != $provider) {
                 $consumer = ['provider' => $provider];
             }
+            $ret = [];
+            foreach($consumer as $k => $v) {
+                if (is_string($k)) {
+                    $ret[$k] = $v;
+                }
+            }
 
-            $this->consumers[$provider] = new Consumer($consumer);
+            $this->consumers[$provider] = new Consumer($ret);
         }
 
         return $this->consumers[$provider];
@@ -155,7 +162,7 @@ class OAuth2Store extends Store
         while($rs->fetch()) {
             App::credential()->delCredentials(
                 $this->getType($provider),
-                (string) $rs->f('credential_value'),
+                $rs->strField('credential_value'),
                 null, // do not take care of local user
                 false // by blog
             );

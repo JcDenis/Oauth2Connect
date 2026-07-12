@@ -11,6 +11,7 @@ use Dotclear\Helper\Network\Http;
 use Dotclear\Helper\OAuth2\Client\Client;
 use Dotclear\Helper\OAuth2\Client\Provider;
 use Dotclear\Helper\OAuth2\Client\Exception\InvalidUser;
+use Dotclear\Plugin\FrontendSession\FrontendSession;
 use Dotclear\Schema\OAuth2\Auth0Connect;
 use Dotclear\Schema\OAuth2\GithubConnect;
 use Dotclear\Schema\OAuth2\GoogleConnect;
@@ -46,10 +47,13 @@ class OAuth2Client extends Client
     protected function requestActionError(Exception $e): bool
     {
         if (is_a($e, InvalidUser::CLASS)) {
-            App::frontend()->context()->frontend_session->addError(
-                __('This user is not registered on this blog.') . " \n" .
-                __('You must have a valid account and authorizsed application connection.')
-            );
+            $fs = App::frontend()->context()->__get('frontend_session');
+            if ($fs instanceof FrontendSession) {
+                $fs->addError(
+                    __('This user is not registered on this blog.') . " \n" .
+                    __('You must have a valid account and authorizsed application connection.')
+                );
+            }
 
             return true;
         }
@@ -59,10 +63,11 @@ class OAuth2Client extends Client
 
     protected function checkUser(string $user_id): bool
     {
-        if (App::auth()->checkUser($user_id, null, null, false) 
-            && App::frontend()->context()->frontend_session?->check($user_id)
-        ) {
-            App::blog()->triggerBlog();
+        if (App::auth()->checkUser($user_id, null, null, false)) {
+            $fs = App::frontend()->context()->__get('frontend_session');
+            if (($fs instanceof FrontendSession) && $fs->check($user_id)) {
+                App::blog()->triggerBlog();
+            }
 
             return true;
         }
@@ -72,9 +77,10 @@ class OAuth2Client extends Client
 
     public function getDisabledProviders(): array
     {
-        $disabled = json_decode((string) App::blog()->settings()->get(self::CONTAINER_ID)->get('disabled_providers'));
+        $disabled = App::blog()->settings()->get(self::CONTAINER_ID)->get('disabled_providers');
+        $disabled = json_decode(is_string($disabled) ? $disabled : '');
 
-        return is_array($disabled) ? $disabled : [];
+        return is_array($disabled) ? array_filter($disabled, fn (mixed $v): bool => is_string($v)) : [];
     }
 
     public function setDisabledProviders(array $providers): void

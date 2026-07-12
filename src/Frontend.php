@@ -84,12 +84,14 @@ class Frontend
                 $oauth2_items = [];
                 if (self::oauth2() !== null) {
                     foreach (self::oauth2()->services()->getProviders() as $oauth2_service) {
-                        if (self::oauth2()->services()->hasDisabledProvider($oauth2_service::getId())
-                            || !self::oauth2()->store()->hasConsumer($oauth2_service::getId())
+                        $id = $oauth2_service::getId();
+                        if (!is_string($id) 
+                            || self::oauth2()->services()->hasDisabledProvider($id)
+                            || !self::oauth2()->store()->hasConsumer($id)
                         ) {
                             continue;
                         }
-                        $link = self::oauth2()->getActionButton((string) App::auth()->userID(), $oauth2_service::getId(), Http::getSelfURI(), true);
+                        $link = self::oauth2()->getActionButton((string) App::auth()->userID(), $id, Http::getSelfURI(), true);
                         if ($link !== null) {
                             $oauth2_items[] = (new Li())->items([$link]);
                         }
@@ -109,12 +111,14 @@ class Frontend
             'FrontendSessionWidget'        => function (ArrayObject $lines, string $redir): void {
                 if (self::oauth2() !== null && !App::auth()->userID()) {
                     foreach (self::oauth2()->services()->getProviders() as $oauth2_service) {
-                        if (self::oauth2()->services()->hasDisabledProvider($oauth2_service::getId())
-                            || !self::oauth2()->store()->hasConsumer($oauth2_service::getId())
+                        $id = $oauth2_service::getId();
+                        if (!is_string($id) 
+                            || self::oauth2()->services()->hasDisabledProvider($id)
+                            || !self::oauth2()->store()->hasConsumer($id)
                         ) {
                             continue;
                         }
-                        $link = self::oauth2()->getActionButton((string) App::auth()->userID(), $oauth2_service::getId(), Http::getSelfURI());
+                        $link = self::oauth2()->getActionButton((string) App::auth()->userID(), $id, Http::getSelfURI());
                         if ($link !== null) {
                             $lines[] = (new Li())
                                 ->items([$link]);
