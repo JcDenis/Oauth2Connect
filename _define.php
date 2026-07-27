@@ -14,7 +14,9 @@
  */
 declare(strict_types=1);
 
-$id = 'Oauth2Connect';
+if (!isset($this) || !is_object($this) || !method_exists($this, 'registerModule') || !isset($this->id) || !is_string($this->id)) {
+    return;
+}
 
 $this->registerModule(
     'Oauth2 Connect',
@@ -28,9 +30,9 @@ $this->registerModule(
         ],
         'permissions' => 'My',
         'type'        => 'plugin',
-        'support'     => 'https://github.com/JcDenis/' . $id . '/issues',
-        'details'     => 'https://github.com/JcDenis/' . $id . '/',
-        'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $id . '/master/dcstore.xml',
+        'support'     => 'https://github.com/JcDenis/' . $this->id . '/issues',
+        'details'     => 'https://github.com/JcDenis/' . $this->id . '/',
+        'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $this->id . '/master/dcstore.xml',
         'date'        => '2025-09-13T15:56:02+00:00',
     ]
 );
