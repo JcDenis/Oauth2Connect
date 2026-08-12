@@ -1,4 +1,4 @@
-Oauth2Connect 0.4 - xxxx.xx.xx
+Oauth2Connect 0.4 - 2026.08.12
 ==========================================================
 * Bump Dotclear from 2.36 to 2.39
 

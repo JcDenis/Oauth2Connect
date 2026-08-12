@@ -28,7 +28,7 @@ use Exception;
  */
 class OAuth2Client extends Client
 {
-    protected function getDefaultServices(): array
+    public function getDefaultServices(): array
     {
         return [    // @phpstan-ignore-line
             GoogleConnect::PROVIDER_ID => GoogleConnect::CLASS,
