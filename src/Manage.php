@@ -252,6 +252,8 @@ class Manage
             ->items($items)
             ->render();
 
+        Page::helpBlock(My::id() . '-index');
+
         Page::closeModule();
     }
 
