@@ -29,3 +29,8 @@ msgstr "Autoriser la connexion %s"
 msgid "Revoke %s connection"
 msgstr "Révoquer la connexion à %s"
 
+msgid "This user is not registered on this blog."
+msgstr "Cet utilisateur n'est pas enregistré sur ce blog."
+
+msgid "You must have a valid account and authorized application connection."
+msgstr "Vous devez avoir un compte valide et avoir autorisé la connexion de l'application."

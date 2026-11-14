@@ -1,0 +1,71 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Project-Id-Version: Oauth2Connect\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2026-11-14T23:00:00+00:00\n"
+"Last-Translator: Jean-Christian Denis\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Oauth2 Connect"
+msgstr "Oauth2 Connect"
+
+msgid "Allow third party connection on frontend."
+msgstr "Permet les connexions par des services tiers sur la partie publique."
+
+msgid "Application console"
+msgstr "Console de l'application"
+
+msgid "Go to application console"
+msgstr "Aller à la console de l'application"
+
+msgid "Application key:"
+msgstr "Clé de l'application :"
+
+msgid "Application secret:"
+msgstr "Secret de l'application :"
+
+msgid "Application domain:"
+msgstr "Domaine de l'application :"
+
+msgid "Only for providers that require it, as full URL like \"https://example.eu.auth0.com\"."
+msgstr "Seulement pour les fournisseurs qui le demandent, en URL complète comme « https://example.eu.auth0.com »."
+
+msgid "Consumer successfully updated."
+msgstr "Le fournisseur a été mis à jour."
+
+msgid "Provider successfully disabled."
+msgstr "Le fournisseur a été désactivé."
+
+msgid "Provider successfully enabled."
+msgstr "Le fournisseur a été activé."
+
+msgid "Disable"
+msgstr "Désactiver"
+
+msgid "Enable"
+msgstr "Activer"
+
+msgid "No service provider to configure"
+msgstr "Aucun fournisseur de service à configurer"
+
+msgid "Rules:"
+msgstr "Règles :"
+
+msgid "Your blog MUST be publicly accessible. (No IP nor local network)"
+msgstr "Votre blog DOIT être accessible publiquement. (Ni adresse IP ni réseau local)"
+
+msgid "Your blog MUST be secured using HTTPS."
+msgstr "Votre blog DOIT être sécurisé en HTTPS."
+
+msgid "You MUST have a valid third party application. (see console link)"
+msgstr "Vous DEVEZ avoir une application tierce valide. (voir le lien de la console)"
+
+msgid "Plugin %s MUST be configured and enabled."
+msgstr "Le plugin %s DOIT être configuré et activé."
+
+msgid "You MUST set blog URL \"%s\" as callback URL in your application."
+msgstr "Vous DEVEZ indiquer l'URL du blog « %s » comme URL de rappel dans votre application."
