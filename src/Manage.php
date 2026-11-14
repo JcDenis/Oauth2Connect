@@ -61,6 +61,7 @@ class Manage
 
         if (!empty($_POST) && self::$oauth2 !== null) {
             $disabled = self::$oauth2->getDisabledProviders();
+            $notice   = __('Consumer successfully updated.');
 
             foreach (self::$oauth2->services()->getProviders() as $id => $class) {
                 if (($_POST['provider'] ?? '') === $id) {
@@ -70,26 +71,28 @@ class Manage
                             // disable provider
                             $disabled[] = $id;
                         }
+                        $notice = __('Provider successfully disabled.');
                     } elseif (!empty($_POST[$id . 'enable'])) {
                         if ($key !== false) {
                             // enable provider
                             unset($disabled[$key]);
                         }
+                        $notice = __('Provider successfully enabled.');
                     } else {
                         // save provider
                         self::$oauth2->store()->setConsumer(
                             $id,
                             is_string($_POST[$id . 'key']) ? $_POST[$id . 'key'] : '',
                             is_string($_POST[$id . 'secret']) ? $_POST[$id . 'secret'] : '',
-                            is_string($_POST[$id . 'domain']) ? $_POST[$id . 'domain'] : ''
+                            self::cleanDomain(is_string($_POST[$id . 'domain'] ?? null) ? $_POST[$id . 'domain'] : '')
                         );
                     }
                 }
             }
 
-            self::$oauth2->setDisabledProviders($disabled);
+            self::$oauth2->setDisabledProviders(array_values($disabled));
 
-            Notices::addSuccessNotice(__('Consumer successfully updated.'));
+            Notices::addSuccessNotice($notice);
             My::redirect();
         }
 
@@ -110,9 +113,9 @@ class Manage
                     continue;
                 }
                 if (in_array($id, $disabled)) {
-                    // disabled provider
+                    // disabled provider (not loaded by services)
                     $items[] = (new Fieldset())
-                        ->legend(new Legend($class::getName()))
+                        ->legend(new Legend(self::$oauth2->getProviderLogoById($id) . ' ' . $class::getName()))
                         ->items([
                             (new Form($id . '_config'))
                                 ->method('post')
@@ -182,6 +185,9 @@ class Manage
                                                 ->value(is_string($consumer->get('domain')) ? $consumer->get('domain') : '')
                                                 ->label(new Label(__('Application domain:'), Label::OL_TF)),
                                         ]),
+                                    (new Note())
+                                        ->class('form-note')
+                                        ->text(__('Only for providers that require it, as full URL like "https://example.eu.auth0.com".')),
 
                                     (new Para())
                                         ->separator(' ')
@@ -201,6 +207,14 @@ class Manage
 
         if (empty($items)) {
             $items[] = (new Text('p', __('No service provider to configure')));
+            // Explain why
+            if (self::$oauth2 !== null) {
+                try {
+                    self::$oauth2->checkRedirectUrl(true);
+                } catch (Exception $e) {
+                    $items[] = (new Text('p', $e->getMessage()))->class('warning-msg');
+                }
+            }
         } else {
             array_unshift($items, (new Div())
                 ->class('static-msg')
@@ -209,9 +223,9 @@ class Manage
                     (new Ul())
                         ->items([
                             (new li())
-                                ->text(__('Your blog MUST be publically accessible. (No IP nor local network)')),
+                                ->text(__('Your blog MUST be publicly accessible. (No IP nor local network)')),
                             (new li())
-                                ->text(__('You blog MUST be secured using HTTPS.')),
+                                ->text(__('Your blog MUST be secured using HTTPS.')),
                             (new li())
                                 ->text(__('You MUST have a valid third party application. (see console link)')),
                             (new li())
@@ -241,4 +255,16 @@ class Manage
         Page::closeModule();
     }
 
+    /**
+     * Clean application domain, an URL without trailing slash.
+     */
+    private static function cleanDomain(string $domain): string
+    {
+        $domain = rtrim(trim($domain), '/');
+        if ($domain !== '' && !preg_match('#^https?://#i', $domain)) {
+            $domain = 'https://' . $domain;
+        }
+
+        return $domain;
+    }
 }

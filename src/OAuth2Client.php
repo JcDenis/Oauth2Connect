@@ -51,7 +51,7 @@ class OAuth2Client extends Client
             if ($fs instanceof FrontendSession) {
                 $fs->addError(
                     __('This user is not registered on this blog.') . " \n" .
-                    __('You must have a valid account and authorizsed application connection.')
+                    __('You must have a valid account and authorized application connection.')
                 );
             }
 
@@ -90,7 +90,15 @@ class OAuth2Client extends Client
 
     public function getProviderLogo(Provider $provider): string
     {
-        return (new Img(My::fileURL(sprintf('img/%s.svg', $provider->getId()))))
+        return $this->getProviderLogoById($provider->getId());
+    }
+
+    /**
+     * Get HTML provider logo from its ID, even if provider is disabled.
+     */
+    public function getProviderLogoById(string $id): string
+    {
+        return (new Img(My::fileURL(sprintf('img/%s.svg', $id))))
             ->width(24)
             ->height(24)
             ->render();
