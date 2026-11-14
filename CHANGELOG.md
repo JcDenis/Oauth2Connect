@@ -1,3 +1,10 @@
+Oauth2Connect 0.5 - 2026.11.14
+===========================================================
+* [fix] Admin page: explain missing providers, notices, domain URL, disabled provider logo
+* [lang] Add French translation of admin page and missing public strings
+* [docs] Add a user guide in French, with screenshots
+* [docs] Add the admin help in English and French
+
 Oauth2Connect 0.4 - 2026.08.12
 ==========================================================
 * Bump Dotclear from 2.36 to 2.39
