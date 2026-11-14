@@ -8,7 +8,7 @@
     <desc>Allow third party connection on frontend.</desc>
     <file>https://github.com/JcDenis/Oauth2Connect/releases/download/v0.4/plugin-Oauth2Connect.zip</file>
     <da:dcmin>2.39</da:dcmin>
-    <da:details>https://github.com/JcDenis/Oauth2Connect/src/branch/master/README.md</da:details>
+    <da:details>https://github.com/JcDenis/Oauth2Connect/blob/master/README.md</da:details>
     <da:support>https://github.com/JcDenis/Oauth2Connect/issues</da:support>
   </module>
 </modules>
