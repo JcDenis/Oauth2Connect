@@ -21,7 +21,7 @@ msgid "Third party connections"
 msgstr "Applications d'authentification"
 
 msgid "Connect with %s"
-msgstr "Se connecter avec %s"
+msgstr "Connectez-vous avec %s"
 
 msgid "Authorize %s connection"
 msgstr "Autoriser la connexion %s"
