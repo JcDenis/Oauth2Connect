@@ -1,3 +1,7 @@
+Oauth2Connect 0.5.1 - 2026.11.15
+===========================================================
+* [lang] Do not override core translations
+
 Oauth2Connect 0.5 - 2026.11.14
 ===========================================================
 * [fix] Admin page: explain missing providers, notices, domain URL, disabled provider logo

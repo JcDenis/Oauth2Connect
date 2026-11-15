@@ -22,7 +22,7 @@ $this->registerModule(
     'Oauth2 Connect',
     'Allow third party connection on frontend.',
     'Jean-Christian Paul Denis and Contributors',
-    '0.5',
+    '0.5.1',
     [
         'requires'    => [
             ['core', '2.39'],
@@ -33,6 +33,6 @@ $this->registerModule(
         'support'     => 'https://github.com/JcDenis/' . $this->id . '/issues',
         'details'     => 'https://github.com/JcDenis/' . $this->id . '/',
         'repository'  => 'https://raw.githubusercontent.com/JcDenis/' . $this->id . '/master/dcstore.xml',
-        'date'        => '2026-11-14T22:51:58+00:00',
+        'date'        => '2026-11-15T15:11:28+00:00',
     ]
 );
